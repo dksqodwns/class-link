@@ -16,5 +16,7 @@ export class LoggerMiddleware implements NestMiddleware {
         `${method} ${originalUrl} ${statusCode} ${contentLenght} - ${userAgent} ${ip}`,
       );
     });
+
+    next();
   }
 }
