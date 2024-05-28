@@ -1,5 +1,6 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { RequiredTimeEntity } from './RequiredTimeEntity';
+import { Matching } from './Matching';
 
 @Entity()
 export class Group extends RequiredTimeEntity {
@@ -12,5 +13,6 @@ export class Group extends RequiredTimeEntity {
   @Column({ name: 'group_description' })
   groupDescription: string;
 
-  // TODO: 유저 그룹 다대다 관계 설정
+  @OneToOne(() => Matching, (matching) => matching.group)
+  matching: Matching;
 }

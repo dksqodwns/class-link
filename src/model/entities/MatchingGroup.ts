@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Matching } from './Matching';
 
 /**
  * 매칭을 수락하면 만들어지는 엔티티
@@ -11,5 +12,6 @@ export class MatchingGroup {
   @Column({ name: 'approved_group_id' })
   approvedGroupId: number;
 
-  // TODO: 매칭과 연관관계 설정 1대 1
+  @OneToOne(() => Matching, (matching) => matching.matchingGroup)
+  matching: Matching;
 }

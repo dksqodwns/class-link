@@ -1,8 +1,6 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { MemberController } from './member/member.controller';
-import { MemberService } from './member/member.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import {
   Comment,
@@ -14,16 +12,21 @@ import {
   Profile,
   School,
   User,
-} from './entity';
+} from './model';
+import { UserModule } from './user/user.module';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
+    ConfigModule.forRoot({
+      envFilePath: '.env',
+    }),
     TypeOrmModule.forRoot({
-      type: process.env.DB_TYPE,
+      type: 'postgres',
       host: process.env.DB_HOST,
       port: +process.env.DB_PORT,
       username: process.env.DB_USERNAME,
-      password: process.env.DB_PASSWORD,
+      password: '',
       database: process.env.DATABASE,
       entities: [
         User,
@@ -36,7 +39,7 @@ import {
         Group,
         Comment,
       ],
-      synchronize: false,
+      synchronize: true,
     }),
     TypeOrmModule.forFeature([
       User,
@@ -49,8 +52,9 @@ import {
       Group,
       Comment,
     ]),
+    UserModule,
   ],
-  controllers: [AppController, MemberController],
-  providers: [AppService, MemberService],
+  controllers: [AppController],
+  providers: [AppService],
 })
 export class AppModule {}
