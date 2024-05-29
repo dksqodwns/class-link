@@ -1,5 +1,5 @@
 import { Column, Entity, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
-import { Matching } from './Matching';
+import { Matching } from './matching.entity';
 
 /**
  * 매칭을 수락하면 만들어지는 엔티티

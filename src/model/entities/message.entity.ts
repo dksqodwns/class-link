@@ -1,6 +1,6 @@
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { RequiredTimeEntity } from './RequiredTimeEntity';
-import { User } from './User';
+import { User } from './user.entity';
 
 @Entity()
 export class Message extends RequiredTimeEntity {

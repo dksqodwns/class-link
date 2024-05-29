@@ -15,34 +15,15 @@ import {
 } from './model';
 import { UserModule } from './user/user.module';
 import { ConfigModule } from '@nestjs/config';
-import * as process from 'node:process';
 import { LoggerMiddleware } from './middleware/logger.middleware';
+import { ormConfig } from './config/ormconfig';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
       envFilePath: '.env',
     }),
-    TypeOrmModule.forRoot({
-      type: 'postgres',
-      host: process.env.DB_HOST,
-      port: +process.env.DB_PORT,
-      username: process.env.DB_USERNAME,
-      password: '',
-      database: process.env.DATABASE,
-      entities: [
-        User,
-        School,
-        Profile,
-        Post,
-        Message,
-        Matching,
-        MatchingGroup,
-        Group,
-        Comment,
-      ],
-      synchronize: true,
-    }),
+    TypeOrmModule.forRoot(ormConfig),
     TypeOrmModule.forFeature([
       User,
       School,

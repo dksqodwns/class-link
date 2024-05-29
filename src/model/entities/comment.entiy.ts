@@ -1,7 +1,6 @@
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { RequiredTimeEntity } from './RequiredTimeEntity';
-import { User } from './User';
-import { Post } from './Post';
+import { Post, User } from '../index';
 
 @Entity()
 export class Comment extends RequiredTimeEntity {

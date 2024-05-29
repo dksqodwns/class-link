@@ -7,8 +7,8 @@ import {
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { RequiredTimeEntity } from './RequiredTimeEntity';
-import { User } from './User';
-import { Comment } from './Comment';
+import { User } from './user.entity';
+import { Comment } from './comment.entiy';
 
 @Entity()
 export class Post extends RequiredTimeEntity {
@@ -25,7 +25,7 @@ export class Post extends RequiredTimeEntity {
   category: number;
 
   @ManyToOne(() => User, (user) => user.posts)
-  @JoinColumn({ name: 'writer' })
+  @JoinColumn({ name: 'writer', referencedColumnName: 'id' })
   user: User;
 
   @OneToMany(() => Comment, (comment) => comment.post)

@@ -9,11 +9,7 @@ import {
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { RequiredTimeEntity } from './RequiredTimeEntity';
-import { Profile } from './Profile';
-import { Post } from './Post';
-import { Comment } from './Comment';
-import { Message } from './Message';
-import { Group } from './Group';
+import { Comment, Group, Message, Post, Profile } from '../index';
 
 @Entity()
 export class User extends RequiredTimeEntity {
@@ -30,18 +26,21 @@ export class User extends RequiredTimeEntity {
   name: string;
 
   @Column()
+  phone: string;
+
+  @Column()
   photo: string;
 
   @Column()
   birthday: string;
 
-  @Column({ name: 'refresh_token' })
+  @Column({ name: 'refresh_token', nullable: true })
   refreshToken: string;
 
-  @Column()
+  @Column({ nullable: true })
   major: string;
 
-  @Column()
+  @Column({ nullable: true })
   grade: string;
 
   @Column({ nullable: true })
@@ -51,19 +50,19 @@ export class User extends RequiredTimeEntity {
   interests: string;
 
   @Column({ nullable: true })
-  school: number;
+  school: string;
 
-  @OneToOne(() => Profile, (profile) => profile.user)
+  @OneToOne(() => Profile, (profile) => profile.user, { nullable: true })
   @JoinColumn({ name: 'profile_id' })
   profile: Profile;
 
-  @OneToMany(() => Post, (post) => post.user)
+  @OneToMany(() => Post, (post) => post.user, { nullable: true })
   posts: Post[];
 
-  @OneToMany(() => Comment, (comment) => comment.user)
+  @OneToMany(() => Comment, (comment) => comment.user, { nullable: true })
   comments: Comment[];
 
-  @OneToMany(() => Message, (message) => message.user)
+  @OneToMany(() => Message, (message) => message.user, { nullable: true })
   message: Message[];
 
   @ManyToMany(() => Group)

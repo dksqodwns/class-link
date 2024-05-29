@@ -6,8 +6,7 @@ import {
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { RequiredTimeEntity } from './RequiredTimeEntity';
-import { Group } from './Group';
-import { MatchingGroup } from './MatchingGroup';
+import { Group, MatchingGroup } from '../index';
 
 /**
  * 그룹이 매칭 리스트에 매칭을 신청함

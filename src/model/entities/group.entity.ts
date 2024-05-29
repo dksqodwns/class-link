@@ -1,6 +1,6 @@
 import { Column, Entity, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { RequiredTimeEntity } from './RequiredTimeEntity';
-import { Matching } from './Matching';
+import { Matching } from './matching.entity';
 
 @Entity()
 export class Group extends RequiredTimeEntity {
